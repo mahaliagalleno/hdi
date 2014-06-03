@@ -1,0 +1,57 @@
+
+  public function save_image_to_folder($entry_json)
+  {
+  
+    $entry_arr = json_decode($entry_json, true);
+    extract($entry_arr);
+
+    $entry = base64_decode($photo);
+    $image = imagecreatefromstring($entry);
+    $directory = dirname(__FILE__).DIRECTORY_SEPARATOR."/".$folder."/".DIRECTORY_SEPARATOR."".$title.".jpeg";
+    header ( 'Content-type:image/jpeg' ); 
+    imagejpeg($image, $directory);
+    imagedestroy ( $image ); 
+ 
+    exit();
+  }
+  
+  public function res_admin_insert_menu($data)
+  {
+
+    $this->table = 'tbl_menus';
+    $menu_code = $data['branch_id']."-".strtoupper(substr($data['menu_name'], 0, 3));
+    $send['branch_id'] = $data['branch_id'];
+    $send['menu_code'] = $menu_code;
+    $send['menu_img'] = $data['menu_img'];
+    $send['menu_name'] = strtolower($data['menu_name']);
+    $send['menu_desc'] = $data['menu_desc'];
+    $send['menu_status'] = $data['menu_status'];
+    $send['menu_category'] = strtolower($data['menu_category']);
+    $send['uom'] = $data['uom'];    
+    $send['quantity'] = $data['quantity'];
+  
+    echo $this->insert($send);  
+    $this->save_image_to_folder($data['image_entry']);
+  }
+  
+function res_admin_update_table($data)
+{
+  $this->table = 'tbl_menus';
+  if($data['menu_img'] != '')
+  {
+    $send['menu_img'] = $data[''];
+  }
+  $send['menu_name'] = $data['menu_name'];
+  $send['menu_desc'] = $data['menu_desc'];
+  $send['menu_price'] = $data['menu_price'];
+  $send['menu_category'] = $data['menu_category'];
+  $send['menu_status'] = $data['menu_status'];
+  $send['quantity'] = $data['quantity'];
+  $send['uom'] = $data['uom'];
+  
+  $cond['menu_id'] = $data['get_menu_id'];
+  
+  $result = $this->update($send,$cond);
+  $this->save_image_to_folder($data['image_entry']);
+   
+}
