@@ -102,11 +102,11 @@ $(document).ready(function(){
 		
 		if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
 			$(this).closest('li').removeClass('active');
-			checkElement.slideUp('normal');
+			checkElement.slideUp('fast');
 		}
 		if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
-			$('.cssmenu ul ul:visible').slideUp('normal');
-			checkElement.slideDown('normal');
+			$('.cssmenu ul ul:visible').slideUp('fast');
+			checkElement.slideDown('fast');
 		}
 		if($(this).closest('li').find('ul').children().length == 0) {
 			return true;
@@ -120,128 +120,17 @@ $(document).ready(function(){
 	});
 });
 </script>
-<!-- SYSTEM ADMIN -->
-<div id="system_admin" style="display: none;">
-	<div class='cssmenu'>
-		<ul>
-			<li class='has-sub' style=""><a><span>USER MGMT</span></a>
-				<ul>
-					<li><a href='#' id="restaurants"><span>Restaurants</span></a></li>
-					<li><a href='#' id="add_restaurant"><span>Add Restaurant</span></a></li>
-					<li><a href='#' id='sysad_report'><span>Report</span></a></li>
-				</ul>
-			</li>
-			<li class='has-sub' style=""><a><span>CATEGORY MGMT</span></a>
-				<ul>
-					<li><a href='#' id="class" ><span>Class</span></a></li>
-					<li><a href='#' id='product' ><span>Menus</span></a></li>
-					<li><a href='#'><span>Add Menu</span></a></li>
-					<li><a href='#'><span>Payment Method</span></a></li>
-					<li><a href='#'><span>Add Payment Method</span></a></li>
-					<li><a href='#'><span>Order Type</span></a></li>
-					<li><a href='#'><span>Add Order Type</span></a></li>
-					<li><a href='#'><span>Restaurant Type</span></a></li>
-					<li><a href='#'><span>Add Restaurant Type</span></a></li>
-				</ul>
-			</li>
-			<li class='has-sub' style=""><a><span>TRANSACTIONS</span></a>
-				<ul>
-					<li><a href='#' ><span>Pending</span></a></li>
-					<li><a href='#'><span>Delivered</span></a></li>
-					<li><a href='#' ><span>Cancelled</span></a></li>
-				</ul>
-			</li>
-			<li class='has-sub' style=""><a><span>AD MANAGEMENT</span></a>
-				<ul>
-					<li><a href='#' ><span>Front</span></a></li>
-					<li><a href='#'><span>Top</span></a></li>
-					<li><a href='#' ><span>Right</span></a></li>
-					<li><a href='#' ><span>Bottom</span></a></li>
-					<li><a href='#' ><span>Left</span></a></li>
-				</ul>
-			</li>
-		</ul>
-	</div>
-</div><!-- /system_admin -->
 
-<!-- RESTAURANT ADMIN -->
-<div id="resto_admin" style="display: none;">
+<div>
 	<div class='cssmenu'>	
 		<ul>
-			<li class='has-sub' style=""><a><span>USER MGMT</span></a>
+			<li class='has-sub' style=""><a id='face_of_edsa' ><span>FACE OF EDSA</span></a>
 				<ul>
-					<li><a href='#' id='product'><span>Products</span></a></li>
-					<li><a href='#' id='manager'><span>Manager</span></a></li>
-					<li><a href='#'><span>Brand</span></a></li>
-					<li><a href='#' id='product'><span>Branches</span></a></li>
-					<li><a href='#' id='staff'><span>Add Branches</span></a></li>
-					<li><a href='#' id='resadmin_report'><span>Report</span></a></li>
-				</ul>
-			</li>
-			<li class='has-sub' style=""><a><span>TRANSACTIONS</span></a>
-				<ul>
-					<li><a href='#' ><span>Pending</span></a></li>
-					<li><a href='#'><span>Delivered</span></a></li>
-					<li><a href='#' ><span>Cancelled</span></a></li>
-				</ul>
-			</li>
-			<li class='has-sub' style=""><a><span>AD MANAGEMENT</span></a>
-				<ul>
-					<li><a href='#' ><span>Front</span></a></li>
-					<li><a href='#'><span>Top</span></a></li>
-					<li><a href='#' ><span>Right</span></a></li>
-					<li><a href='#' ><span>Bottom</span></a></li>
-					<li><a href='#' ><span>Left</span></a></li>
+					<li><a href='#' id="celebrity"><span>Celebrity</span></a></li>
+					<li><a href='#' id="audiences"><span>Audiences</span></a></li>
+					<li><a href='#' id='winners'><span>Winners</span></a></li>
 				</ul>
 			</li>
 		</ul>
 	</div><!-- /cssmenu -->
-</div><!-- /resto_admin -->
-
-<!-- MANAGER -->
-<div id="manager" style="display: none;">
-	<div class='cssmenu'>		
-		<ul>	
-			<li class='has-sub'><a><span>USER MGMT</span></a>
-				<ul>
-					<li><a href='#'  id = 'staff'><span>Staff</span></a></li>
-				</ul>
-			</li>
-			<li class='has-sub'><a><span>FOOD MGMT</span></a>
-				<ul>
-					<li><a href='#' id= 'product'><span>Foods</span></a></li>
-					<li><a href='#' id= 'add_product'><span>Add Foods</span></a></li>
-				</ul>
-			</li>
-			<li class='has-sub' style=""><a><span>TRANSACTIONS</span></a>
-				<ul>
-					<li><a href='#'  id = 'all_trans'><span>All</span></a></li>
-					<li><a href='#' id = 'pending_trans' ><span>Pending</span></a></li>
-					<li><a href='#' id = 'delivered_trans'><span>Delivered</span></a></li>
-					<li><a href='#' id = 'cancelled_trans' ><span>Cancelled</span></a></li>
-				</ul>
-			</li>
-		</ul>
-	</div><!-- /cssmenu -->
-</div><!-- /manager -->
-
-<!-- STAFF -->
-<div id="staff" style="display: none;">	
-	<div class='cssmenu'>		
-		<ul>	
-			<li class='has-sub'><a><span>FOOD MGMT</span></a>
-				<ul>
-					<li><a href='#'><span>Foods</span></a></li>
-					<li><a href='#'><span>Add Foods</span></a></li>
-				</ul>
-			</li>
-			<li class='has-sub' style=""><a><span>TRANSACTIONS</span></a>
-				<ul>
-					<li><a href='#' ><span>Pending</span></a></li>
-					<li><a href='#'><span>Delivered</span></a></li>
-					<li><a href='#' ><span>Cancelled</span></a></li>
-				</ul>
-			</li>
-		</ul>
-	</div><!-- /cssmenu -->
-</div><!-- /staff -->
+</div>

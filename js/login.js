@@ -26,6 +26,7 @@ $(document).ready(function(){
 			url:'controller.php',
 			data : {'function_name': 'sha1_pass', 'pwd' : pwd.val(),  },
 			success: function(response){
+				
 				$.ajax({
 					type:'POST',
 					url:'controller.php',
@@ -33,7 +34,7 @@ $(document).ready(function(){
 						'usr': usr.val(),
 						'pwd': response,},
 					success: function(response){
-					//alert(response);
+					
 						if(response != '[]'){
 							$('#err_message').fadeOut();
 							$.ajax({

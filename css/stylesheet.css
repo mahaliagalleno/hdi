@@ -313,13 +313,13 @@ input[type="button"]:active {
 
 
 
-#radioset_status span, #radioset_promo span, #radioset_latest_product span,#radioset_best_seller span {
+#radioset_celebrity_status span, .rad_celebrity_status span{
   font-weight: initial;
   font-family: Calibri;
   font-size: initial;
  }
 
-#radioset_status label, #radioset_promo label, #radioset_latest_product label, #radioset_best_seller label {
+#radioset_celebrity_status label, .rad_celebrity_status label {
   width: 50%;
  }
  

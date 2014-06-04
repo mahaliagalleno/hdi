@@ -1,24 +1,45 @@
 <?php
 	
 	class functions extends table{
-	
-		public function add_category_menu(){
+		
+		/*
+		  Author : Mahalia Rose
+		  Function: get_celebrity
+		  Desc: Get List of Celebrities
+		*/
+		public function get_celebrity(){
 			global $conn;
 			extract($_POST);
-
-			$this->table = 'tbl_cat_menu';
-
-				$data['menu'] = $menu;
-				$data['menu_status'] = '1';
-
-			$id = $this->insert($data);
-			
-			if($id > 0)
-			{
-				echo $id;
-			}else{
+			$query = $conn->query("SELECT * FROM tbl_celebrity WHERE celebrity_status != 3" );			
+			$results = $query->fetchAll(PDO::FETCH_ASSOC);
+			$json_data = json_encode($results);
+  		    echo $json_data;
+		}
+		
+		public function add_celebrity(){
+			extract($_POST);
+			$this->table = 'tbl_celebrity';	
+			$celebrity_exist  = $this->check_existence("celebrity = '".$celebrity."' and celebrity_status != 3");
+			if($celebrity_exist){
 				echo 0;
-			}		
+			}else{
+				$data['celebrity'] = $celebrity;
+				$data['celebrity_status'] = $celebrity_status;
+				$id = $this->insert($data);
+				echo $id;
+			}
+		}
+		
+		public function delete_celebrity(){
+			$this->table = 'tbl_celebrity';
+			foreach($_POST['data'] as $celebrity_id)
+	 	    {
+				$send['celebrity_status'] = 3;  // celebrity status of 3 means deleted
+				$cond['celebrity_id'] = $celebrity_id;
+				print_r($send);
+				print_r($cond);
+				$result = $this->update($send,$cond);
+		    }
 		}
 		
 		/*
@@ -252,8 +273,13 @@
 			global $conn;
 			extract($_POST);
 		        
-			$sql_que = "SELECT u.*,ut.user_type,(SELECT restaurant_id from tbl_branch where branch_id = u.branch_id) as res_id from tbl_users u join tbl_cat_user_type ut on u.user_type_id =ut.user_type_id where 
-                   u.username= '".$usr."' and u.password = '".$pwd."' and u.user_type_id != 1";
+			$sql_que = "SELECT u . * , ut.user_type
+						FROM tbl_users u
+						JOIN tbl_user_types ut ON u.user_type_id = ut.user_type_id
+						WHERE u.email_add =  '".$usr."'
+						AND u.password =  '".$pwd."'
+						AND u.user_type_id =1";
+
 			$query = $conn->query($sql_que);
             $results = $query->fetchAll(PDO::FETCH_ASSOC);
             $json_data = json_encode($results);
@@ -385,36 +411,7 @@
 			session_destroy();
 		}
 		
-		 /*
-		  Author : Justin Xyrel 
-		  Date: 05/01/14
-		  Function: get_manager
-		  Desc: Get List of managers in a particular restaurant
-		  Params: post data such us $res_id
-		*/ 
-		public function get_manager(){	
-		  global $conn;
-		  
-		  if(!isset($_SESSION)){
-			session_start();
-		  }		
-		//  echo "<pre>",print_r($_SESSION['auth']),"</pre>";
-		     $fields = array('fname','lname','middle');
-			  $res_id = $_SESSION['auth'][0]['res_id'];
-
-			$sql_que = "SELECT u.*,ut.user_type,rb.branch_name,
-			            (SELECT country FROM tbl_cat_country WHERE country_id = rb.country_id) as country 	
-						FROM tbl_users u
-						JOIN tbl_cat_user_type ut ON u.user_type_id =ut.user_type_id 
-						JOIN tbl_branch rb ON u.branch_id = rb.branch_id WHERE 
-						rb.restaurant_id= $res_id AND u.user_type_id = 4 ";
-
-		 //   var_dump($sql_que);die();
-			$query = $conn->query($sql_que);
-            $results = $query->fetchAll(PDO::FETCH_ASSOC);
-            $json_data = json_encode($results);
-  		    echo $json_data;
-		}
+		
 		
 		/********** CLASS **********/
 		/*

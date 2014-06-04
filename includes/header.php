@@ -9,7 +9,6 @@
 	if($var_func->is_logged_in()){
 	    $username = ucfirst($_SESSION['auth']['0']['fname']);
 		$usertype_id = ucfirst($_SESSION['auth']['0']['user_type_id']);
-		$branch_id = $_SESSION['auth']['0']['branch_id'];
 		$account_type = ucwords(str_replace('_', ' ' ,$_SESSION['auth']['0']['user_type']));
 	} else {
 		echo "<script>window.location.assign('index.php');</script>";
@@ -57,7 +56,6 @@ $(document).ready(function(){
 				<td>
 					<div id="userBox">
 						<input type = "hidden" id = "ut_id" value="<?php echo $usertype_id; ?>">
-						<input type = "hidden" id = "br_id" value="<?php echo $branch_id; ?>">
 						<span>Name: <?php echo $username; ?></span></br>
 						<span><?php echo $account_type; ?></span>
 					</div>
