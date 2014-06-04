@@ -36,11 +36,22 @@
 	 	    {
 				$send['celebrity_status'] = 3;  // celebrity status of 3 means deleted
 				$cond['celebrity_id'] = $celebrity_id;
-				print_r($send);
-				print_r($cond);
 				$result = $this->update($send,$cond);
 		    }
 		}
+		
+		public function update_celebrity(){
+			$this->table = 'tbl_celebrity';
+			foreach($_POST['data'] as $items)
+	 	    {
+				extract($items);
+			
+				$send['celebrity_status'] = $value;  // celebrity status of 3 means deleted
+				$cond['celebrity_id'] = $name;
+				$result = $this->update($send,$cond);
+		    }
+		}
+		/**********************************END OF HDI******************************************/
 		
 		/*
 		  Author : Mahalia Rose
@@ -60,6 +71,8 @@
 			$json_data = json_encode($results);
   		    echo $json_data;
 		}
+		
+		
 		/*
 		  Author : Mahalia Rose
 		  Function: get_distinct_class

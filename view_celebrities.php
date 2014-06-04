@@ -9,6 +9,7 @@
 	</head>
 	<body>
 		<div id='alert_msg' class="" style='display:none;'></div>
+		<div id='dialog-remove' style='display:none;' >Are you sure you want to delete selected files?</div>
 		
 		<a class="btn btn-default" id="add_celebrity" ><span class="glyphicon glyphicon-plus"></span>&nbsp;Add New Celebrity</a>
 		<br/>
@@ -54,7 +55,7 @@
 				</td>
 			</tr>	
 		</table><!-- /searchtable -->
-		<form  id=''>
+		<form  id='list_celebrity'>
 		<table width="100%" id="celebrity" class="advancedtable" border="0" cellspacing="0" cellpadding="0">
 			<thead>
 				<tr>
@@ -107,10 +108,9 @@
 			</tbody>
 		</table><!-- /staff -->
 		</form>
-		<br/>
+		<div class='nav_buttons'>
 		<a class="btn btn-default" id="remove_celebrity" style='float:right;' disabled><span class="glyphicon glyphicon-remove"></span>&nbsp;Delete Selected</a>
 		<a class="btn btn-default" id="update_celebrity" style='float:right;' ><span class="glyphicon glyphicon-saved"></span>&nbsp;Save Updates</a>	
-		
 		</div>
 	
 		<script language="javascript" type="text/javascript">
