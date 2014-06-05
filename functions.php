@@ -289,7 +289,7 @@
 			$sql_que = "SELECT u . * , ut.user_type
 						FROM tbl_users u
 						JOIN tbl_user_types ut ON u.user_type_id = ut.user_type_id
-						WHERE u.email_add =  '".$usr."'
+						WHERE u.username =  '".$usr."'
 						AND u.password =  '".$pwd."'
 						AND u.user_type_id =1";
 
