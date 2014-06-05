@@ -33,7 +33,7 @@ $(document).ready(function(){
 	<table id="tbl_left">
 		<tr>
 			<td>
-				<a href="home.php"><img src="images/ifoods_logo_2.png" /></a>
+				<a href="home.php"><img src="css/images/OOHRANGE.png" /></a>
 			</td>
 			
 		</tr>
@@ -52,7 +52,7 @@ $(document).ready(function(){
 						</div><!-- /input-group -->
 					</div><!-- /.col-lg-6 -->
 				</td>
-				<td style="text-align: center;"><img src="images/brand_logo.png" /></td>
+				<td style="text-align: center;"><!--<img src="images/brand_logo.png" />--></td>
 				<td>
 					<div id="userBox">
 						<input type = "hidden" id = "ut_id" value="<?php echo $usertype_id; ?>">
@@ -72,7 +72,7 @@ $(document).ready(function(){
 				<td>
 					<div id="slickdiv">
 						<ul id="menu" style="display:none;">
-							<li><a href="update_profile.php">My Account</a></li>
+							<li><a>My Account</a></li>
 							<li><a href="logout.php">Logout</a></li>
 						</ul>
 					</div>

@@ -395,13 +395,14 @@
 		public function login_user(){		 
 			global $conn;
 			extract($_POST);
-		        
-			$sql_que = "SELECT u . * , ut.user_type
+			// var_dump($_POST);die();
+			$is_admin = (isset($_POST['u_type']) and $_POST['u_type'] != 'customer') ? 'AND u.user_type_id = 1': ""; 
+			$sql_que = "SELECT u.* , ut.user_type
 						FROM tbl_users u
 						JOIN tbl_user_types ut ON u.user_type_id = ut.user_type_id
 						WHERE u.username =  '".$usr."'
 						AND u.password =  '".$pwd."'
-						AND u.user_type_id =1";
+						".$is_admin;
 
 			$query = $conn->query($sql_que);
             $results = $query->fetchAll(PDO::FETCH_ASSOC);

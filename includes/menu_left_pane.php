@@ -30,7 +30,7 @@
 	font-size: 25px;
 	font-weight: bold;
 	display: block;
-	background: #ed1144;
+	background: #f36f21;
 	color: #ffffff;
 	border-bottom: 1px solid #ffffff;
 	text-transform: uppercase;
@@ -54,7 +54,7 @@
 }
 .cssmenu > ul > li.active > a span {
 	/*background: #bd0e36;*/
-	background: #ed1144;
+	background: #f36f21;
 }
 .cssmenu span.cnt {
 	position: absolute;

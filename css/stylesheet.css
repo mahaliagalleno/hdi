@@ -218,14 +218,14 @@ input[type="button"]:active {
  }
  
  .formTable input[type="submit"] {
-	background-color: #fe0000;
+	background-color: #f36f21;
 	padding: 6px 24px;
 	border: none;
 	margin-top: 7px;
 	float: right;
 	color: #fff;
 	border-radius: 3px;
-	box-shadow: 0px 3px #C01717;
+	box-shadow: 0px 3px #D55D17;
  }
  .formTable input[type="submit"]:active {
 	position:relative;
