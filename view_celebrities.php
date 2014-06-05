@@ -61,7 +61,7 @@
 				<tr>
 					<th>Name of Celebrity</th>
 					<th style="text-align: center;">Status</th>
-					<th style="text-align: center;">Delete</th>
+					<th style="text-align: center; display:none;">Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -97,7 +97,7 @@
 							if($celebrity_status == 0){ echo $disable;	}else{echo $enable;}
 								
 						echo "</td>
-							<td style='text-align: center;'>
+							<td style='text-align: center; display:none;'>
 								<input type='checkbox' id='$celebrity_id' name='celebrity_delete' />
 							</td>
 						</tr>
@@ -118,7 +118,7 @@
 				$("#radioset_status").buttonset();
 				$('select#searchOn').children().remove();
 				$("#searchtable").show();
-				$("table#celebrity").advancedtable({searchField: "#search", loadElement: "#loader", searchCaseSensitive: false, ascImage: "css/images/up.png", descImage: "css/images/down.png", searchOnField: "#searchOn"});
+				$("table#celebrity").advancedtable({searchField: "#search", loadElement: "#loader", searchCaseSensitive: false, ascImage: "css/images/up.png", descImage: "css/images/down.png", searchOnField: "#searchOn", sorting: false});
 			});
 		</script>
 	</body>

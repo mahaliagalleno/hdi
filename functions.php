@@ -2,6 +2,116 @@
 	
 	class functions extends table{
 		
+		public function get_tbl_education(){
+			global $conn;
+			$lookup = $conn->query("SELECT DISTINCT education_id,education  FROM tbl_education");
+			$lookup_results = $lookup->fetchAll(PDO::FETCH_ASSOC);
+			$json_data = json_encode($lookup_results);
+			return $json_data;
+		}
+		
+		public function get_tbl_employment(){
+			global $conn;
+			$lookup = $conn->query("SELECT DISTINCT employment_id,employment  FROM tbl_employment");
+			$lookup_results = $lookup->fetchAll(PDO::FETCH_ASSOC);
+			$json_data = json_encode($lookup_results);
+			return $json_data;
+		}
+		
+		public function get_stat_education(){
+			global $conn;
+			extract($_POST);
+			$list_educ = $this->get_tbl_education();
+			$list_educ = json_decode($list_educ, true);
+
+			$query = $conn->query("SELECT COUNT( e.education_id ) AS education_count,e.education_id, e.education
+					FROM tbl_face_of_edsa foe
+					JOIN tbl_users u ON foe.user_id = u.user_id
+					JOIN tbl_education e ON e.education_id = u.education_id
+					GROUP BY u.education_id");		
+								
+			$results = $query->fetchAll(PDO::FETCH_ASSOC);
+			
+			foreach($results as $data){
+				$educ_count[$data['education_id']] = $data;
+			}
+			
+		    foreach($list_educ as &$data){
+				if(!isset($educ_count[$data['education_id']])){
+				   $educ_values[] = array('education_count' => 0, 
+								  'education' => $data['education'],
+								  'education_id' => $data['education_id']);
+				
+				}else{
+				   $educ_values[] = $educ_count[$data['education_id']];
+				}
+			}
+			
+			 $json_data = json_encode($educ_values);
+  		     echo $json_data;
+		}
+		
+		public function get_stat_gender(){
+			global $conn;
+			extract($_POST);
+			$query = $conn->query("SELECT COUNT(u.gender_id) as gender_count,g.gender 
+								FROM tbl_face_of_edsa foe
+								JOIN tbl_users u ON foe.user_id = u.user_id 
+								JOIN tbl_gender g ON g.gender_id=u.gender_id
+								GROUP BY u.gender_id" );			
+			$results = $query->fetchAll(PDO::FETCH_ASSOC);
+			//echo "<pre>",print_r($results),"</pre>";
+			$json_data = json_encode($results);
+  		    echo $json_data;
+		}
+		
+		public function get_stat_employment(){
+			// global $conn;
+			// extract($_POST);
+			// $query = $conn->query("SELECT COUNT( em.employment_id ) AS employment_count, em.employment
+								// FROM tbl_face_of_edsa foe
+								// JOIN tbl_users u ON foe.user_id = u.user_id
+								// JOIN tbl_employment em ON em.employment_id = u.employment_id
+								// GROUP BY u.employment_id" );			
+			// $results = $query->fetchAll(PDO::FETCH_ASSOC);
+			// $json_data = json_encode($results);
+  		    // echo $json_data;
+			
+			
+			global $conn;
+			extract($_POST);
+			$list_emp = $this->get_tbl_employment();
+			$list_emp = json_decode($list_emp, true);
+
+			$query = $conn->query("SELECT COUNT( em.employment_id ) AS employment_count, em.employment, em.employment_id
+								FROM tbl_face_of_edsa foe
+								JOIN tbl_users u ON foe.user_id = u.user_id
+								JOIN tbl_employment em ON em.employment_id = u.employment_id
+								GROUP BY u.employment_id");		
+								
+			$results = $query->fetchAll(PDO::FETCH_ASSOC);
+			
+			foreach($results as $data){
+				$emp_count[$data['employment_id']] = $data;
+			}
+			
+		    foreach($list_emp as &$data){
+				if(!isset($emp_count[$data['employment_id']])){
+				   $emp_values[] = array('education_count' => 0, 
+								  'employment' => $data['employment'],
+								  'employment_id' => $data['employment_id']);
+				
+				}else{
+				   $emp_values[] = $emp_count[$data['employment_id']];
+				}
+			}
+			
+			 $json_data = json_encode($emp_values);
+  		     echo $json_data;
+		}
+		
+		
+		
 		/*
 		  Author : Mahalia Rose
 		  Function: get_celebrity
@@ -289,7 +399,7 @@
 			$sql_que = "SELECT u . * , ut.user_type
 						FROM tbl_users u
 						JOIN tbl_user_types ut ON u.user_type_id = ut.user_type_id
-						WHERE u.email_add =  '".$usr."'
+						WHERE u.username =  '".$usr."'
 						AND u.password =  '".$pwd."'
 						AND u.user_type_id =1";
 

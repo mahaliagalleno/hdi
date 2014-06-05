@@ -110,10 +110,12 @@ $(document).ready(function(){
 	}
 	
 	function build_dialog_yes_no(element_id, function_name){
+	var myPos = [ $(window).width() / 'center', 100 ];
 			$(element_id).dialog({
 				height: 'auto',
 				width: 'auto',
 				autoOpen: false,
+				position: myPos,
 				modal: true,
  				buttons: {
 					'Yes' : function (){

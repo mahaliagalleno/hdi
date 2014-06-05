@@ -1,4 +1,6 @@
-
+var temp_data;
+var chart;
+var data_gender;
 	$(document).unbind().on('ready',function(event) {
 
 		function build_dialog(element_id){
@@ -14,7 +16,7 @@
 				}
 			});
 		}
-
+		
 		if($('#homeMainContainer').length > 0){
 		
 			if($('input#ut_id').val() == '1'){
@@ -22,6 +24,26 @@
 				$.isLoading("hide");
 			}
 		}
+	
+		
+		
+
+		$('a#face_of_edsa').unbind().one('click',function(event){
+			
+			$.ajax({
+				type: 'POST',
+				url:'view_statistics.php',
+				success: function (response){
+					
+					$('div#content_bottom').html("");
+					$('div#content_bottom').html(response);
+					setTimeout(function(){$('g[cursor="pointer"]').remove();},400);
+					$.isLoading("hide");	
+					
+				}
+			});
+				
+		});
 		
 	    // Display Celebrities Page
 		$('a#celebrity').unbind().one('click',function(event){
@@ -32,7 +54,7 @@
 				url:'controller.php',
 				data: {'function_name':'get_celebrity'},
 				success: function (resp){ 
-					console.log(resp);
+					//console.log(resp);
 					var obj = jQuery.parseJSON(resp);
 					
 					$.ajax({
@@ -45,6 +67,7 @@
 							$.isLoading("hide");	
 						}
 					});	
+					console.log('Celebrity downloaded.');
 				}
 			});								
 		});
@@ -96,5 +119,7 @@
 			
 		  }
         }		
+		
+		
 		
 	});

@@ -11,9 +11,6 @@
 	}
 ?>
 
-<style>
-
-</style>
 
 <script>
 
