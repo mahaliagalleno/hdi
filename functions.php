@@ -285,7 +285,7 @@
 		public function login_user(){		 
 			global $conn;
 			extract($_POST);
-		        
+		    var_dump($_POST);die();
 			$sql_que = "SELECT u . * , ut.user_type
 						FROM tbl_users u
 						JOIN tbl_user_types ut ON u.user_type_id = ut.user_type_id
