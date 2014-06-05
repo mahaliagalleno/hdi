@@ -285,8 +285,8 @@
 		public function login_user(){		 
 			global $conn;
 			extract($_POST);
-		   // var_dump($_POST);die();
-			$is_admin = ($_POST['u_type'] != 'customer') ? 'AND u.user_type_id = 1': ""; 
+			// var_dump($_POST);die();
+			$is_admin = (isset($_POST['u_type']) and $_POST['u_type'] != 'customer') ? 'AND u.user_type_id = 1': ""; 
 			$sql_que = "SELECT u.* , ut.user_type
 						FROM tbl_users u
 						JOIN tbl_user_types ut ON u.user_type_id = ut.user_type_id
