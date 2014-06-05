@@ -18,7 +18,7 @@
  
 <div id="loginMainContainer">
  
-<div id="logoBox"><img src="images/ifoods_logo.png" /></div>
+<div id="logoBox"><img src="css/images/OOHRANGE.png" /></div>
  
 <div id="containerBox">
 		
@@ -48,7 +48,7 @@
 		
 	</form>
 
-	<div id="BoxFooter" style=""><span class="glyphicon glyphicon-copyright-mark"></span><span> iFoods Corporation | All Rights Reserved 2014</span></div>
+	<div id="BoxFooter" style=""><span class="glyphicon glyphicon-copyright-mark"></span><span> HDI | All Rights Reserved 2014</span></div>
 	
 </div><!-- /containerBox -->
 

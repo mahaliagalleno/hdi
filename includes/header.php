@@ -33,7 +33,7 @@ $(document).ready(function(){
 	<table id="tbl_left">
 		<tr>
 			<td>
-				<a href="home.php"><img src="images/ifoods_logo_2.png" /></a>
+				<a href="home.php"><img src="css/images/OOHRANGE.png" /></a>
 			</td>
 			
 		</tr>
