@@ -65,19 +65,49 @@
   		    echo $json_data;
 		}
 		
+		public function get_tbl_civil_status(){
+			global $conn;
+			$lookup = $conn->query("SELECT DISTINCT civil_status_id ,civil_status  FROM tbl_civil_status");
+			$lookup_results = $lookup->fetchAll(PDO::FETCH_ASSOC);
+			$json_data = json_encode($lookup_results);
+			return $json_data;
+		}
+		
+		public function get_stat_civil_status(){
+			global $conn;
+			extract($_POST);
+			$list_cv = $this->get_tbl_civil_status();
+			$list_cv = json_decode($list_cv, true);
+
+			$query = $conn->query("SELECT COUNT( u.civil_status_id ) AS civil_status_count, cv.civil_status_id, cv.civil_status
+								FROM tbl_face_of_edsa foe
+								JOIN tbl_users u ON foe.user_id = u.user_id
+								JOIN tbl_civil_status cv ON cv.civil_status_id = u.civil_status_id
+								GROUP BY u.civil_status_id 
+								ORDER BY cv.civil_status_id");		
+								
+			$results = $query->fetchAll(PDO::FETCH_ASSOC);
+			
+			foreach($results as $data){
+				$cv_count[$data['civil_status_id']] = $data;
+			}
+			
+		    foreach($list_cv as &$data){
+				if(!isset($cv_count[$data['civil_status_id']])){
+				   $cv_values[] = array('civil_status_count' => 0, 
+								   'civil_status_id' => $data['civil_status_id'],
+								   'civil_status' => $data['civil_status']);
+				
+				}else{
+				   $cv_values[] = $cv_count[$data['civil_status_id']];
+				}
+			}
+			
+			 $json_data = json_encode($cv_values);
+  		     echo $json_data;
+		}
+		
 		public function get_stat_employment(){
-			// global $conn;
-			// extract($_POST);
-			// $query = $conn->query("SELECT COUNT( em.employment_id ) AS employment_count, em.employment
-								// FROM tbl_face_of_edsa foe
-								// JOIN tbl_users u ON foe.user_id = u.user_id
-								// JOIN tbl_employment em ON em.employment_id = u.employment_id
-								// GROUP BY u.employment_id" );			
-			// $results = $query->fetchAll(PDO::FETCH_ASSOC);
-			// $json_data = json_encode($results);
-  		    // echo $json_data;
-			
-			
 			global $conn;
 			extract($_POST);
 			$list_emp = $this->get_tbl_employment();
@@ -108,6 +138,62 @@
 			
 			 $json_data = json_encode($emp_values);
   		     echo $json_data;
+		}
+		
+		public function get_stat_city(){
+			global $conn;
+			extract($_POST);
+			
+			$query = $conn->query("SELECT COUNT( foe.city_id ) AS city_count, c.city
+					FROM tbl_face_of_edsa foe
+					JOIN tbl_city c ON c.city_id = foe.city_id
+					GROUP BY foe.city_id");		
+								
+			$results = $query->fetchAll(PDO::FETCH_ASSOC);
+			
+			 $json_data = json_encode($results);
+  		     echo $json_data;
+		}
+		
+		public function get_stat_age(){
+			global $conn;
+			extract($_POST);
+			
+			$query = $conn->query("SELECT `group`, COUNT(*) as `count`
+FROM `tbl_users` u
+JOIN tbl_face_of_edsa foe ON foe.user_id = u.user_id
+INNER JOIN (
+    SELECT 
+        0 as `start`, 13 as `end`, '0-12' as `group`
+    UNION ALL 
+    SELECT
+        13, 17, '13-17'
+    UNION ALL
+    SELECT
+        18, 24, '18-24'
+    UNION ALL
+    SELECT
+        25, 34, '25-34'
+    UNION ALL
+	SELECT
+        35, 44, '35-44'
+    UNION ALL
+    SELECT
+        45, 54, '45-54'
+    UNION ALL
+	SELECT
+        55, 64, '55-64'
+    UNION ALL
+    SELECT
+        65, 150, '65+'
+) `sub`
+    ON TIMESTAMPDIFF(YEAR,from_unixtime(u.birth_date),NOW()) BETWEEN `start` AND `end`
+GROUP BY `group` WITH ROLLUP");
+								
+			$results = $query->fetchAll(PDO::FETCH_ASSOC);
+			
+			$json_data = json_encode($results);
+  		    echo $json_data;
 		}
 		
 		
